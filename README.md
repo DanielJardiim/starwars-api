@@ -115,18 +115,18 @@ pytest
 
 ```mermaid
 flowchart TD
-    A[Usuário (Frontend ou API Client)]
-    A --> B[API Gateway (AWS)]
-    B --> C[AWS Lambda (FastAPI)]
-    C --> D[FastAPI App]
+    A["Usuário: Frontend ou API Client"]
+    A --> B["API Gateway (AWS)"]
+    B --> C["AWS Lambda (FastAPI)"]
+    C --> D["FastAPI App"]
 
     subgraph FastAPI Interno
-        D --> E[Auth (JWT)]
-        D --> F[Rotas: /films, /planets, /characters, /starships]
-        F --> G[Serviço SWAPI Client]
+        D --> E["Auth (JWT)"]
+        D --> F["Rotas: /films, /planets, /characters, /starships"]
+        F --> G["Serviço SWAPI Client"]
     end
 
-    G --> H[SWAPI (https://swapi.py4e.com)]
+    G --> H["SWAPI (https://swapi.py4e.com)"]
 ```
 
 ---
