@@ -62,7 +62,7 @@ Todos os endpoints retornam dados enriquecidos com informações de entidades re
 
 ```bash
 # 1. Clone o repositório
-git clone https://github.com/seuusuario/starwars-api.git
+git clone https://github.com/DanielJardiim/starwars-api.git
 cd starwars-api
 
 # 2. Crie o ambiente virtual
@@ -115,16 +115,19 @@ pytest
 
 ```mermaid
 flowchart TD
-    A[Usuário] --> B[API Gateway (AWS)]
-    B --> C[AWS Lambda<br/>(FastAPI + Mangum)]
-    C --> D[Validação de JWT]
-    C --> E[Star Wars API<br/>(https://swapi.py4e.com)]
+    A[Usuário (Frontend ou API Client)]
+    A --> B[API Gateway (AWS)]
+    B --> C[AWS Lambda (FastAPI)]
+    C --> D[FastAPI App]
+
+    subgraph FastAPI Interno
+        D --> E[Auth (JWT)]
+        D --> F[Rotas: /films, /planets, /characters, /starships]
+        F --> G[Serviço SWAPI Client]
+    end
+
+    G --> H[SWAPI (https://swapi.py4e.com)]
 ```
-
-**Observações:**
-
-- A aplicação é serverless, sem necessidade de gerenciar servidores.
-- A API se comporta como um middleware inteligente entre o cliente e a SWAPI, com autenticação e enriquecimento de dados.
 
 ---
 
