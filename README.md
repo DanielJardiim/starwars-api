@@ -107,35 +107,24 @@ pytest
 
 - Empacotamento com `Mangum`
 - Integração com **API Gateway**
-- Upload via **AWS Console** ou **AWS SAM CLI**
+- Upload via **AWS Console ou SAM CLI**
 
 ---
 
 ## 📏 Diagrama de Arquitetura
 
 ```mermaid
-graph TD
-    subgraph Cliente
-        A[Usuário Frontend ou API externa]
-    end
-
-    subgraph AWS
-        B[API Gateway] --> C[AWS Lambda (FastAPI)]
-    end
-
-    subgraph Serviços
-        C --> D[Validação do JWT]
-        C --> E[Consulta à SWAPI]
-    end
-
-    A --> B
-    E --> F[https://swapi.py4e.com/api]
+flowchart TD
+    A[Usuário] --> B[API Gateway (AWS)]
+    B --> C[AWS Lambda<br/>(FastAPI + Mangum)]
+    C --> D[Validação de JWT]
+    C --> E[Star Wars API<br/>(https://swapi.py4e.com)]
 ```
 
 **Observações:**
 
-- A aplicação é 100% serverless, sem necessidade de gerenciar infraestrutura.
-- Funciona como um middleware inteligente entre o cliente e a SWAPI, oferecendo autenticação, enriquecimento e filtros de dados.
+- A aplicação é serverless, sem necessidade de gerenciar servidores.
+- A API se comporta como um middleware inteligente entre o cliente e a SWAPI, com autenticação e enriquecimento de dados.
 
 ---
 
